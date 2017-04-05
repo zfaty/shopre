@@ -1,0 +1,28 @@
+.search-btn-group {
+  display: inline;
+}
+
+
+/*************Login Modal Style****************/
+
+/*.custom-modal{
+
+}*/
+.custom-modal .modal-header{
+  background: #4fbfa8;
+}
+.custom-modal .modal-header h4{
+  color: #fff;
+}
+.custom-modal .modal-body a {
+  color: #4fbfa8;
+}
+.custom-modal .modal-bodyl p {
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+.custom-modal .modal-body {
+    position: relative;
+    padding: 15px;
+}
+/*************End Login Modal Style************/

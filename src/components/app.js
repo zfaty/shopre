@@ -11,7 +11,7 @@ export default class App extends Component {
       <div>
         <TopBar />
         <NavBar />
-        <div className="page-content">
+        <div className="page-content container">
           {this.props.children}
         </div>
       </div>

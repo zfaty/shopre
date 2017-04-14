@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchProduct } from '../actions/index';
+import { fetchProductAsync } from '../actions/index';
 import { Link } from 'react-router';
 
 class SearchBar extends Component {
@@ -18,20 +18,19 @@ class SearchBar extends Component {
   }
 
   onInputChange(event) {
-    //console.log('value',event.target.value);
     this.setState({ term: event.target.value });
   }
 
   onFormSubmit(event) {
     event.preventDefault();
-    this.props.fetchProduct(this.state.term);
+    this.props.fetchProductAsync(this.state.term);
     this.setState({ term: '' });
-    console.log('Submit',this.state);
+    //console.log('Submit',this.state);
     this.context.router.push('/search/'+this.state.term);
   }
 
   render() {
-    console.log('this.props.products',this.props.products)
+  //  console.log('this.props.products',this.props.products)
     return (
       <div className="clearfix" id="search">
         <form onSubmit={this.onFormSubmit} action="" className="navbar-form">
@@ -53,11 +52,11 @@ class SearchBar extends Component {
 
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchProduct }, dispatch);
+  return bindActionCreators({ fetchProductAsync }, dispatch);
 }
 
-function mapStateToProps({ products }) {
-  return { products };
-}
+// function mapStateToProps({ products }) {
+//   return { products };
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
+export default connect(null, mapDispatchToProps)(SearchBar);

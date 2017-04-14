@@ -1,12 +1,15 @@
-import { FETCH_PRODUCTS } from '../actions/index';
+import * as types from '../actions/actionTypes';
+import initialState from './initialState';
 
-const INITIAL_STATE = { all: [], product: null };
+const INITIAL_STATE = { all: [], productss: null };
 
-export default function(state = INITIAL_STATE, action) {
+
+export default function ProductsReaducer(state = INITIAL_STATE, action) {
   switch(action.type) {
-  case FETCH_PRODUCTS:
-    return { ...state, all: action.payload };
-  default:
-    return state;
+    case types.FETCH_PRODUCTS:
+      console.log("action",action);
+      return { ...state, all: action.payload };
+    default:
+      return state;
   }
 }

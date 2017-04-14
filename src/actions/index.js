@@ -1,22 +1,37 @@
 import axios from 'axios';
+import * as types from './actionTypes';
 
-// const API_KEY = 'f0d096918dd0857882cd6ddadd01ec3c';
-// const ROOT_URL = `http://api.openweathermap.org/data/2.5/forecast?appid=${API_KEY}`;
-const data = [
-  {title: 'Javascript V1' ,pages: 100},
-  {title: 'PHP Cours',pages: 8},
-  {title: 'Harry Potter',pages: 50},
-  {title: 'My Book',pages: 20}
-];
-export const FETCH_PRODUCTS = 'FETCH_PRODUCTS';
+const PUBLIC_TOKEN = '$2y$13$IknDLKh01Hs5WDp8NXPODOG3JpUxKvfuL6WCvQKE59MMeVD9i2wr2';
 
-export function fetchProduct(term) {
-  console.log('Action fetchProduct',term);
-  // const url = `${ROOT_URL}&q=${city},us`;
-  // const request = axios.get(url);
+var TOKEN = sessionStorage.jwt;
+if(!sessionStorage.jwt){
+  var TOKEN = PUBLIC_TOKEN;
+}
+const ROOT_URL = `http://api.shop.dev/api`;
 
-  return {
-    type: FETCH_PRODUCTS,
-    payload: data
+
+var instance = axios.create({
+  baseURL: ROOT_URL,
+  headers: {"X-AUTH-TOKEN":TOKEN}
+});
+
+export function fetchProduct(response) {
+  return {type: types.FETCH_PRODUCTS, payload :response.data }
+}
+
+
+export function fetchProductAsync(term) {
+    console.log('tocken',sessionStorage.jwt);
+    console.log('Action fetchProduct.....',term);
+
+  return function(dispatch) {
+    const request = instance.get('/users');
+
+    return request.then(response => {
+      dispatch(fetchProduct(response));
+    })
+    .catch(error => {
+      throw(error);
+    });
   };
 }

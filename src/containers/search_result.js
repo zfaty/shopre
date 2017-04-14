@@ -8,23 +8,18 @@ class SearchResult extends Component {
   renderResults() {
     return this.props.products.all.map((product) => {
       return (
-        <li className="list-group-item" key={product.title}>
-            <strong>{product.title}</strong>
+        <li className="list-group-item" key={product.id}>
+            <strong>{product.username}</strong>
 
         </li>
       );
     });
   }
   render() {
-    console.log('this.props',this.props);
-    console.log('this.props.products',this.props.products);
+  //  console.log('this.props',this.props);
+    console.log('this.props.products',this.props);
     return (
       <div>
-        <div className="text-xs-right">
-          <Link to="/posts/new" className="btn btn-primary">
-            Add a Post
-          </Link>
-        </div>
         <h3>Search Result for {this.props.params.term}</h3>
         <ul className="list-group">
           {this.renderResults()}
@@ -35,8 +30,9 @@ class SearchResult extends Component {
 }
 
 
-function mapStateToProps({ products }) {
-  return { products };
+function mapStateToProps(state,ownProps) {
+   console.log('this.props',state);
+  return { products: state.products };
 }
 
 export default connect(mapStateToProps)(SearchResult);
